@@ -330,11 +330,19 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
+-- Tab settings
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+
+-- Text wrapping
+vim.o.wrap = true
+
 -- [[ Basic Keymaps ]]
 
 -- Page up and down mods: centers after moving
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', 'G', 'Gzz')
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -348,7 +356,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -688,5 +696,14 @@ cmp.setup {
   },
 }
 
+-- [[ Configure Harpoon ]]
+-- See `:help harpoon`
+require('harpoon'):setup({})
+
+-- [[ Configure todo-comments ]]
+-- See `:help todo-comments`
+require('todo-comments').setup()
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
