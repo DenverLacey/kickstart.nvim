@@ -149,7 +149,7 @@ require('lazy').setup({
         -- Navigation
         map({ 'n', 'v' }, ']c', function()
           if vim.wo.diff then
-            return ']c'
+            return ']h'
           end
           vim.schedule(function()
             gs.next_hunk()
@@ -157,9 +157,9 @@ require('lazy').setup({
           return '<Ignore>'
         end, { expr = true, desc = 'Jump to next hunk' })
 
-        map({ 'n', 'v' }, '[c', function()
+        map({ 'n', 'v' }, '[h', function()
           if vim.wo.diff then
-            return '[c'
+            return '[h'
           end
           vim.schedule(function()
             gs.prev_hunk()
@@ -703,6 +703,23 @@ require('harpoon'):setup({})
 -- [[ Configure todo-comments ]]
 -- See `:help todo-comments`
 require('todo-comments').setup()
+
+-- [[ Configure Treesitter-Context ]]
+-- See `:help nvim-treesitter-context`
+require('treesitter-context').setup({
+  enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+  max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+  min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+  line_numbers = true,
+  multiline_threshold = 20, -- Maximum number of lines to show for a single context
+  trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+  mode = 'cursor',  -- Line used to calculate context. Choices: 'cursor', 'topline'
+  -- Separator between context and content. Should be a single character string, like '-'.
+  -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+  separator = nil,
+  zindex = 20, -- The Z-index of the context window
+  on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
