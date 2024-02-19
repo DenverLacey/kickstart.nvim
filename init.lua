@@ -481,6 +481,9 @@ vim.o.wrap = true
 
 -- [[ Basic Keymaps ]]
 
+-- Explorer Keymap
+vim.keymap.set('n', '<leader>pv', ':Ex<cr>', { desc = 'Go to explorer view' })
+
 -- Page up and down mods: centers after moving
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
