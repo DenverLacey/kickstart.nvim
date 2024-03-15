@@ -60,6 +60,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- [[ Helper functions ]]
+
 -- [[ Configure plugins ]]
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
@@ -369,6 +371,34 @@ require('lazy').setup({
         theme = 'auto',
         component_separators = '|',
         section_separators = '',
+      },
+      sections = {
+        lualine_b = {'filename'},
+        lualine_c = {
+          {
+            'diagnostics',
+            sources = {
+              function()
+                local err_cnt = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+                local warn_cnt = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+                local info_cnt = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+                local hint_cnt = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+                local table = { error = err_cnt, warn = warn_cnt, info = info_cnt, hint = hint_cnt }
+                return table
+              end
+            },
+            always_visible = true,
+          }
+        },
+        lualine_x = {
+          {
+            'harpoon2',
+            indicators = {' 1 ', ' 2 ', ' 3 ', ' 4 '},
+            active_indicators = {'[1]', '[2]', '[3]', '[4]'}
+          },
+          'encoding',
+          'filetype',
+        },
       },
     },
   },
