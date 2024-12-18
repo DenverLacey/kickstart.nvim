@@ -67,6 +67,15 @@ vim.opt.rtp:prepend(lazypath)
 
 -- [[ Helper functions ]]
 
+-- [[ Add filetypes ]]
+vim.filetype.add({
+  extension = {
+    c3 = "c3",
+    c3i = "c3",
+    c3t = "c3",
+  },
+})
+
 -- [[ Configure plugins ]]
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
@@ -507,9 +516,6 @@ vim.o.wrap = true
 
 -- [[ Basic Keymaps ]]
 
--- Explorer Keymap
-vim.keymap.set('n', '<leader>pv', ':Ex<cr>', { desc = 'Go to explorer view' })
-
 -- Page up and down mods: centers after moving
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
@@ -626,7 +632,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'c3', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -742,25 +748,29 @@ local on_attach = function(_, bufnr)
 end
 
 -- document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  -- ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
-  ['<leader>H'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-  ['<leader>u'] = { name = 'Undotree: Toggle', _ = 'which_key_ignore' }
+require('which-key').add {
+  { "<leader>H", group = "[H]arpoon" },
+  { "<leader>H_", hidden = true },
+  { "<leader>c", group = "[C]ode" },
+  { "<leader>c_", hidden = true },
+  { "<leader>d", group = "[D]ocument" },
+  { "<leader>d_", hidden = true },
+  { "<leader>g", group = "[G]it" },
+  { "<leader>g_", hidden = true },
+  { "<leader>r", group = "[R]ename" },
+  { "<leader>r_", hidden = true },
+  { "<leader>s", group = "[S]earch" },
+  { "<leader>s_", hidden = true },
+  { "<leader>t", group = "[T]oggle" },
+  { "<leader>t_", hidden = true },
+  { "<leader>u", group = "Undotree: Toggle" },
+  { "<leader>u_", hidden = true },
+  { "<leader>w", group = "[W]orkspace" },
+  { "<leader>w_", hidden = true },
+  { "<leader>", group = "VISUAL <leader>", mode = "v" },
 }
 
--- register which-key VISUAL mode
--- required for visual <leader>hs (hunk stage) to work
-require('which-key').register({
-  ['<leader>'] = { name = 'VISUAL <leader>' },
-  -- ['<leader>h'] = { 'Git [H]unk' },
-}, { mode = 'v' })
+require('lspconfig').c3_lsp.setup {}
 
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
@@ -867,4 +877,6 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- TODO: Help
 
