@@ -46,8 +46,8 @@ return {
     },
     {
       "<leader>xt",
-      "<cmd?Trouble todo toggle<cr>",
-      desc = "Toggle trouble todos list",
+      "<cmd>TodoTrouble<cr><C-w>w",
+      desc = "Todo Diagnostics (TodoTrouble)",
     },
   },
   opts = {
@@ -97,10 +97,10 @@ return {
     -- include_declaration = { "lsp_references", "lsp_implementations", "lsp_definitions"  }, -- for the given modes, include the declaration of the current symbol in the results
     -- signs = {
     --   -- icons / text used for a diagnostic
-      error = "E",
-      warning = "W",
-      hint = "H",
-      information = "I",
+      error = "",
+      warning = "",
+      hint = "󰋗",
+      information = "󰋼",
       other = "O",
     -- },
     -- use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client

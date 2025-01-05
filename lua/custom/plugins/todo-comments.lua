@@ -5,11 +5,6 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
   config = function()
     require('todo-comments').setup()
-
-    -- You can also specify a list of valid jump keywords
-    -- vim.keymap.set("n", "]t", function()
-    --   require("todo-comments").jump_next({keywords = { "ERROR", "WARNING" }})
-    -- end, { desc = "Next error/warning todo comment" })
   end,
   keys = {
     {
@@ -21,11 +16,6 @@ return {
       "[t",
       function() require("todo-comments").jump_prev() end,
       desc = "Next todo comment",
-    },
-    {
-      "<leader>xt",
-      "<cmd>TodoTrouble<CR><C-w>w",
-      desc = "Todo Diagnostics (TodoTrouble)",
     },
   },
   opts = {
