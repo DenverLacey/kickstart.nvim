@@ -251,7 +251,7 @@ require('lazy').setup({
   --   config = function()
   --     require("rose-pine").setup({
   --       variant = "auto", -- auto, main, moon, or dawn
-  --       dark_variant = "moon", -- main, moon, or dawn
+  --       dark_variant = "main", -- main, moon, or dawn
   --       dim_inactive_windows = false,
   --       extend_background_behind_borders = true,
   --
@@ -323,56 +323,74 @@ require('lazy').setup({
   --   end,
   -- },
   -- Catppuccin
+  -- {
+  --   'catppuccin/nvim',
+  --   name = 'catppuccin',
+  --   priority = 1000,
+  --   config = function()
+  --     require("catppuccin").setup({
+  --       flavour = "mocha", -- latte, frappe, macchiato, mocha
+  --       background = { -- :h background
+  --         light = "latte",
+  --         dark = "mocha",
+  --       },
+  --       transparent_background = false, -- disables setting the background color.
+  --       show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+  --       term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+  --       dim_inactive = {
+  --         enabled = false, -- dims the background color of inactive window
+  --         shade = "dark",
+  --         percentage = 0.15, -- percentage of the shade to apply to the inactive window
+  --       },
+  --       no_italic = false, -- Force no italic
+  --       no_bold = false, -- Force no bold
+  --       no_underline = false, -- Force no underline
+  --       styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+  --         comments = { "italic" }, -- Change the style of comments
+  --         conditionals = { "italic" },
+  --         loops = {},
+  --         functions = {},
+  --         keywords = {},
+  --         strings = {},
+  --         variables = {},
+  --         numbers = {},
+  --         booleans = {},
+  --         properties = {},
+  --         types = {},
+  --         operators = {},
+  --       },
+  --       color_overrides = {},
+  --       custom_highlights = {},
+  --       integrations = {
+  --         cmp = true,
+  --         gitsigns = true,
+  --         nvimtree = true,
+  --         treesitter = true,
+  --         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+  --       },
+  --     })
+  --
+  --     -- setup must be called before loading
+  --     vim.cmd.colorscheme "catppuccin"
+  --   end,
+  -- },
+  -- Ashen
   {
-    'catppuccin/nvim',
-    name = 'catppuccin',
+    "ficcdaf/ashen.nvim",
+    lazy = false,
     priority = 1000,
+    -- configuration is optional!
     config = function()
-      require("catppuccin").setup({
-        flavour = "macchiato", -- latte, frappe, macchiato, mocha
-        background = { -- :h background
-          light = "latte",
-          dark = "mocha",
-        },
-        transparent_background = false, -- disables setting the background color.
-        show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-        term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
-        dim_inactive = {
-          enabled = false, -- dims the background color of inactive window
-          shade = "dark",
-          percentage = 0.15, -- percentage of the shade to apply to the inactive window
-        },
-        no_italic = false, -- Force no italic
-        no_bold = false, -- Force no bold
-        no_underline = false, -- Force no underline
-        styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-          comments = { "italic" }, -- Change the style of comments
-          conditionals = { "italic" },
-          loops = {},
-          functions = {},
-          keywords = {},
-          strings = {},
-          variables = {},
-          numbers = {},
-          booleans = {},
-          properties = {},
-          types = {},
-          operators = {},
-        },
-        color_overrides = {},
-        custom_highlights = {},
-        integrations = {
-          cmp = true,
-          gitsigns = true,
-          nvimtree = true,
-          treesitter = true,
-          -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-        },
-      })
-
-      -- setup must be called before loading
-      vim.cmd.colorscheme "catppuccin"
-    end,
+      local ashen = require('ashen')
+      ashen.load()
+    end
+  -- {
+    --   "LazyVim/LazyVim",
+    --   opts = {
+    --     -- your settings here
+    --     colorscheme = "ashen",
+    --   },
+    -- }
   },
 
   {
@@ -520,6 +538,14 @@ vim.o.wrap = true
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'G', 'Gzz')
+
+-- Navigating search results: centers after moving
+vim.keymap.set('n', 'n', 'nzz')
+vim.keymap.set('n', 'N', 'Nzz')
+
+-- Scroll window with <C-j> and <C-k>
+vim.keymap.set('n', '<C-j>', '1<C-d><cmd>set scroll&<CR>')
+vim.keymap.set('n', '<C-k>', '1<C-u><cmd>set scroll&<CR>')
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`

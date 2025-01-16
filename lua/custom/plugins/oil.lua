@@ -10,6 +10,9 @@ return {
     require('oil').setup {
       view_options = {
         show_hidden = true,
+        is_always_hidden = function(name, bufnr)
+            return name == '.DS_Store'
+        end,
       }
     }
     vim.keymap.set('n', '<leader>pv', ':Oil<cr>', { desc = 'Go to explorer view' })
