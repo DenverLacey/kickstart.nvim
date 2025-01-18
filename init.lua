@@ -544,8 +544,8 @@ vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
 
 -- Scroll window with <C-j> and <C-k>
-vim.keymap.set('n', '<C-j>', '1<C-d><cmd>set scroll&<CR>')
-vim.keymap.set('n', '<C-k>', '1<C-u><cmd>set scroll&<CR>')
+vim.keymap.set('n', '<C-j>', '1<C-d><cmd>set scroll&<CR>k')
+vim.keymap.set('n', '<C-k>', '1<C-u><cmd>set scroll&<CR>j')
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
