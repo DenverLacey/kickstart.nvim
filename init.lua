@@ -67,15 +67,6 @@ vim.opt.rtp:prepend(lazypath)
 
 -- [[ Helper functions ]]
 
--- [[ Add filetypes ]]
-vim.filetype.add({
-  extension = {
-    c3 = "c3",
-    c3i = "c3",
-    c3t = "c3",
-  },
-})
-
 -- [[ Configure plugins ]]
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
@@ -483,6 +474,9 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 }, {})
 
+-- [[ Custom Commands ]]
+require('custom.commands').setup()
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
@@ -658,7 +652,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'c3', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -903,4 +897,22 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- [[ Add filetypes ]]
+vim.filetype.add({
+  extension = {
+    c3 = "c3",
+    c3i = "c3",
+    c3t = "c3",
+  },
+})
+
+local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
+parser_configs.c3 = {
+  install_info = {
+    url = "~/c3-tree-sitter",
+    files = {"src/parser.c", "src/scanner.c"},
+    branch = "main",
+  }
+}
 

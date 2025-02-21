@@ -15,6 +15,6 @@ return {
         end,
       }
     }
-    vim.keymap.set('n', '<leader>pv', ':Oil<cr>', { desc = 'Go to explorer view' })
+    vim.keymap.set('n', '-', ':Oil<cr>', { desc = 'Go to explorer view' })
   end
 }
