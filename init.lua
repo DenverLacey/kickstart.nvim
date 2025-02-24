@@ -916,3 +916,11 @@ parser_configs.c3 = {
   }
 }
 
+-- Disable automatically adding comment leader when pressing ENTER or O
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ 'o' })
+  end,
+})
+

@@ -10,8 +10,6 @@ local function align_by_string(info)
         return
     end
 
-    print("Aligning lines", bln, "to", eln)
-
     local lines = vim.api.nvim_buf_get_lines(0, bln-1, eln, true)
 
     local largest_offset = -1
@@ -31,9 +29,9 @@ local function align_by_string(info)
             goto continue
         end
         local n_extra_spaces = largest_offset - offsets[i]
-        local before = string.sub(lines[i], 1, offsets[i] - 1)
-        local after = string.sub(lines[i], offsets[i])
-        local spaces = string.rep(' ', n_extra_spaces)
+        local before         = string.sub(lines[i], 1, offsets[i] - 1)
+        local after          = string.sub(lines[i], offsets[i])
+        local spaces         = string.rep(' ', n_extra_spaces)
         table.insert(replacement, i, before .. spaces .. after)
         ::continue::
     end
