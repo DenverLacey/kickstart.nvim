@@ -366,22 +366,41 @@ require('lazy').setup({
   --   end,
   -- },
   -- Ashen
+  -- {
+  --   "ficcdaf/ashen.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   -- configuration is optional!
+  --   config = function()
+  --     local ashen = require('ashen')
+  --     ashen.load()
+  --   end
+  -- },
+  -- Gruber Darker
   {
-    "ficcdaf/ashen.nvim",
+    'blazkowolf/gruber-darker.nvim',
     lazy = false,
     priority = 1000,
-    -- configuration is optional!
     config = function()
-      local ashen = require('ashen')
-      ashen.load()
-    end
-  -- {
-    --   "LazyVim/LazyVim",
-    --   opts = {
-    --     -- your settings here
-    --     colorscheme = "ashen",
-    --   },
-    -- }
+      local gd = require('gruber-darker')
+      gd.setup {
+        bold = true,
+        invert = {
+          signs   = false,
+          tabline = false,
+          visual  = false,
+        },
+        italic = {
+          strings   = false,
+          comments  = false,
+          operators = false,
+          folds     = true,
+        },
+        undercurl = true,
+        underline = true,
+      }
+      gd.load()
+    end,
   },
 
   {
